@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     # my
     'api.apps.ApiConfig',
+    'authorization.apps.AuthorizationConfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -52,9 +54,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'api.middleware.SessionTokenMiddleware'
 ]
 
 ROOT_URLCONF = 'upcardapi.urls'
+AUTH_USER_MODEL = 'api.Account'
 
 TEMPLATES = [
     {

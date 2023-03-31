@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru" class="page">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'authorization/img/favicon.ico' %}" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>UpCard | Личный кабинет</title>
+    <link rel="stylesheet" href="{% static 'authorization/css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'authorization/css/main.css' %}">
+    <link href="{% static 'authorization/fontawesome-free-6.2.1-web/css/fontawesome.css' %}" rel="stylesheet">
+    <link href="{% static 'authorization/fontawesome-free-6.2.1-web/css/brands.css' %}" rel="stylesheet">
+    <link href="{% static 'authorization/fontawesome-free-6.2.1-web/css/solid.css' %}" rel="stylesheet">
+    <link href="{% static 'authorization/fontawesome-free-6.2.1-web/css/regular.css' %}" rel="stylesheet">
+    <script defer="defer" src="{% static 'authorization/js/main.js' %}"></script>
+</head>
+
+<body class="page__body">
+    <div class="site-container">
+        <header class="header">
+            <div class="header__container"><!-- Наименование страницы -->
+                <h1 class="header__title">{{page_info}}</h1>
+            </div>
+        </header>
+
+
+        {% block content %}{% endblock %}
+
+
+        <footer class="footer">
+            <div class="container"></div>
+        </footer>
+    </div><!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</body>
+
+</html>

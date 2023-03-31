@@ -1,4 +1,33 @@
 from django.db import models
+from django.contrib.auth.models import User
+import uuid
+
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+
+
+class Image(models.Model):
+    """Модель изображения"""
+    
+    PURPOSE = (
+        ('CARD_PERSONAL_PIC', 'Персональное фото картчоки'),
+        ('CARD_LOGO_PIC', 'Лого компании'),
+        ('PORTFOLIO_PIC', 'Портфолио'),
+        ('OTHER', 'Другое'),
+    )
+    
+    img = models.ImageField(upload_to="media/")
+    purpose = models.CharField(max_length=20, choices=PURPOSE)
+    date_create = models.DateTimeField('Дата создания', auto_now_add=True)
+    date_update =models.DateTimeField('Дата обновления', auto_now_add=True)
+    
+    
+    def __str__(self):
+        return self.purpose
+
+    class Meta:
+        verbose_name = 'Изображения'
+        verbose_name_plural = 'Изображение'
+
 
 
 class Social(models.Model):
@@ -46,20 +75,59 @@ class Appearance(models.Model):
         verbose_name_plural = 'Дизайн карточек'
         
 
-class Account(models.Model):
-    """Модель аккаунта"""
-    email = models.CharField('Почта', max_length=250, blank=True)
-    date_create = models.DateTimeField('Дата создания', auto_now_add=True)
-    date_update =models.DateTimeField('Дата обновления', auto_now_add=True)
+
+class AccountManager(BaseUserManager):
+    def create_user(self, email, password=None):
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.model(
+            email=self.normalize_email(email),
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password):
+        user = self.create_user(
+            email,
+            password=password,
+        )
+        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+
+class Account(AbstractBaseUser):
+    email = models.EmailField(unique=True)
+    token = models.CharField(max_length=200, null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+
+    objects = AccountManager()
+
+    USERNAME_FIELD = 'email'
 
     def __str__(self):
         return self.email
 
-    class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+    def has_perm(self, perm, obj=None):
+        return True
 
+    def has_module_perms(self, app_label):
+        return True
 
+    @property
+    def last_login(self):
+        return None
+
+    
+        
 class CompanyInfo(models.Model):
     """Модель инфо о компании"""
     name = models.CharField('Наименование', max_length=250, blank=True)
@@ -73,10 +141,8 @@ class CompanyInfo(models.Model):
     email = models.CharField('Почта', max_length=250, blank=True)
     address = models.CharField('Адрес', max_length=250, blank=True)
     
-   
     id_social = models.ForeignKey(Social, on_delete=models.SET_NULL, blank=True, null=True)
-    id_card = models.ForeignKey(Appearance, on_delete=models.SET_NULL, blank=True, null=True)
-
+    
     date_create = models.DateTimeField('Дата создания', auto_now_add=True)
     date_update =models.DateTimeField('Дата обновления', auto_now_add=True)
     
@@ -103,8 +169,8 @@ class Card(models.Model):
     address = models.CharField('Адрес', max_length=250, blank=True)
     qr = models.CharField('QR', max_length=250, blank=True)
     
-    personal_pic = models.ImageField(upload_to="media/")
-    logo_pic = models.ImageField(upload_to="media/")
+    id_img = models.ManyToManyField(Image, blank=True)
+    id_company_info = models.ForeignKey(CompanyInfo, on_delete=models.SET_NULL, blank=True, null=True)
     
     id_social = models.ForeignKey(Social, on_delete=models.SET_NULL, blank=True, null=True)
     id_appearance = models.ForeignKey(Appearance, on_delete=models.SET_NULL, blank=True, null=True)
@@ -121,16 +187,15 @@ class Card(models.Model):
         verbose_name = 'Карточка'
         verbose_name_plural = 'Карточки'
         
-
 class Portfolio(models.Model):
     """Модель портфолио"""
-    name = models.CharField('Почта', max_length=250, blank=True)
+    email = models.CharField('Почта', max_length=250, blank=True)
     date = models.DateTimeField('Дата', auto_now_add=True)
     description = models.CharField('Описание', max_length=250, blank=True, null=True)
     
-    pic = models.ImageField(upload_to="media/")
-    
+    id_img = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True)
     id_card = models.ForeignKey(Card, on_delete=models.SET_NULL, blank=True, null=True)
+    
     date_create = models.DateTimeField('Дата создания', auto_now_add=True)
     date_update =models.DateTimeField('Дата обновления', auto_now_add=True)
 
@@ -152,3 +217,5 @@ class Calendar(models.Model):
     class Meta:
         verbose_name = 'Календарь'
         verbose_name_plural = 'Календарь'
+        
+        

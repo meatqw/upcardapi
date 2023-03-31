@@ -43,7 +43,22 @@ class CalendarSerializer(serializers.ModelSerializer):
         model = Calendar
         fields = '__all__'
         
+# ----------------------------------------------------------------
+# COMPANYINFO SERIALIZERS
+# ----------------------------------------------------------------
+
+class CompanyInfoSerializer(serializers.ModelSerializer):
+    id_social = SocialSerializer()
+    
+    class Meta:
+        model = CompanyInfo
+        fields = '__all__'
         
+class CompanyPOSTInfoSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = CompanyInfo
+        fields = '__all__'
         
 # ----------------------------------------------------------------
 # CARD SERIALIZERS
@@ -54,24 +69,17 @@ class CardSerializer(serializers.ModelSerializer):
     id_social = SocialSerializer()
     id_appearance = AppearanceSerializer()
     id_account = AccountSerializer()
+    id_company_info = CompanyInfoSerializer()
     
     class Meta:
         model = Card
         fields = '__all__'
         
-        
-# ----------------------------------------------------------------
-# COMPANYINFO SERIALIZERS
-# ----------------------------------------------------------------
-
-class CompanyInfoSerializer(serializers.ModelSerializer):
-    id_card = CardSerializer()
-    id_social = SocialSerializer()
+class CardPOSTSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = CompanyInfo
+        model = Card
         fields = '__all__'
-        
         
 # ----------------------------------------------------------------
 # PORTFOLIO SERIALIZERS
@@ -81,4 +89,21 @@ class PortfolioSerializer(serializers.ModelSerializer):
     id_card = CardSerializer()
     class Meta:
         model = Portfolio
+        fields = '__all__'
+        
+        
+class PortfolioPOSTSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Portfolio
+        fields = '__all__'
+        
+        
+# ----------------------------------------------------------------
+# IMAGE SERIALIZERS
+# ----------------------------------------------------------------
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
         fields = '__all__'

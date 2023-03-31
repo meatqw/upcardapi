@@ -1,0 +1,132 @@
+from django.shortcuts import render
+from rest_framework import generics, viewsets
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from django.forms import model_to_dict
+from rest_framework.exceptions import ValidationError
+from django.http import Http404
+from rest_framework import mixins
+from django.db.models import Q
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
+from api.models import *
+from api.serializers import *
+from django.core import serializers
+from django.http import JsonResponse
+from rest_framework import status
+from datetime import datetime
+
+
+class PortfolioAPIPost(APIView):
+    """Добавить елементы портфолио"""
+
+    def post(self, request, *args, **kwargs):
+
+        # Get the associated Account object
+        token = self.request.GET.get('token')
+        account = Account.objects.filter(token=token).first()
+        data = request.data
+        
+        if account:
+            data['id_account'] = account.id
+            portfolio = PortfolioPOSTSerializer(data=data)
+            if portfolio.is_valid():
+                portfolio.save()
+            else:
+                return Response(portfolio.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            return Response({'id': portfolio.instance.id}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'error': 'No account found'}, status=status.HTTP_400_BAD_REQUEST)
+
+    serializer_class = PortfolioSerializer
+
+
+class PortfolioAPIView(viewsets.ReadOnlyModelViewSet):
+    """Получить портфолио по id и токену"""
+
+    def get_queryset(self):
+        if "token" in self.request.GET:
+            token = self.request.GET['token']
+            account = Account.objects.filter(token=token).first()
+            if account:
+                portfolio = Portfolio.objects.filter(id=self.kwargs['id']).all()
+
+                return portfolio
+            else:
+                raise Http404("No Data")
+        else:
+            raise ValidationError("No Token")
+
+    serializer_class = PortfolioSerializer
+    
+    
+class PortfolioByCardAPIView(viewsets.ReadOnlyModelViewSet):
+    """Получить портфолио по id card и токену"""
+
+    def get_queryset(self):
+        if "token" in self.request.GET:
+            token = self.request.GET['token']
+            account = Account.objects.filter(token=token).first()
+            
+            if account:
+                portfolio = Portfolio.objects.filter(id_card=self.kwargs['id_card']).all()
+
+                return portfolio
+            else:
+                raise Http404("No Data")
+        else:
+            raise ValidationError("No Token")
+
+    serializer_class = PortfolioSerializer
+
+
+class PortfolioAPIUpdate(APIView):
+    """
+    Обновить элемент портфолио
+    """
+    def patch(self, request, *args, **kwargs):
+        if "token" in self.request.GET:
+            token = self.request.GET['token']
+            account = Account.objects.filter(token=token).first()
+            
+            if account:
+                portfolio = Portfolio.objects.filter(id=self.kwargs['id']).first()
+
+                serializer = PortfolioSerializer(
+                    data=request.data, instance=portfolio, partial=True)
+                
+                serializer.is_valid(raise_exception=True)
+                serializer.save()
+            else:
+                return Response({'error': "No data"})
+        else:
+            return Response({'error': "No token"})
+
+        return Response(serializer.data)
+
+    serializer_class = PortfolioSerializer
+    
+    
+class PortfolioAPIDelete(APIView):
+    """
+    Удалить элемент порфолио
+    """
+    def delete(self, request, id):
+        if "token" in self.request.GET:
+            token = self.request.GET['token']
+            account = Account.objects.filter(token=token).first()
+
+            if account:
+                portfolio = Portfolio.objects.filter(id=id).first()
+                if portfolio:
+                    portfolio.delete()
+                    return Response({'success': "Portfolio deleted successfully"})
+                else:
+                    return Response({'error': "Portfolio not found"})
+            else:
+                return Response({'error': "No data"})
+        else:
+            return Response({'error': "No token"})
