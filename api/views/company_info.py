@@ -29,13 +29,14 @@ class CompanyAPIPost(APIView):
         data = request.data
         
         if account:
-            company = CompanyPOSTInfoSerializer(data=data)
-            if company.is_valid():
-                company.save()
+            company_serializer = CompanyInfoPOSTSerializer(data=data)
+            if company_serializer.is_valid():
+                company = company_serializer.save()
+                response_serializer = CompanyInfoSerializer(company)
+                
+                return Response(response_serializer.data, status=status.HTTP_201_CREATED)
             else:
-                return Response(company.errors, status=status.HTTP_400_BAD_REQUEST)
-
-            return Response({'id': company.instance.id}, status=status.HTTP_201_CREATED)
+                return Response(company_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({'error': 'No account found'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -72,15 +73,19 @@ class CompanyAPIUpdate(APIView):
             if account:
                 company = CompanyInfo.objects.filter(id=self.kwargs['id']).first()
 
-                serializer = CompanyInfoSerializer(
+                company_serializer = CompanyInfoPOSTSerializer(
                     data=request.data, instance=company, partial=True)
-                serializer.is_valid(raise_exception=True)
-                serializer.save()
+                company_serializer.is_valid(raise_exception=True)
+                company = company_serializer.save()
+                
+                respone_serialezer = CompanyInfoSerializer(company)
+                
+                return Response(respone_serialezer.data)
             else:
                 return Response({'error': "No data"})
         else:
             return Response({'error': "No token"})
 
-        return Response(serializer.data)
+        
 
     serializer_class = CompanyInfoSerializer

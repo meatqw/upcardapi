@@ -27,17 +27,27 @@ class PortfolioAPIPost(APIView):
         # Get the associated Account object
         token = self.request.GET.get('token')
         account = Account.objects.filter(token=token).first()
-        data = request.data
         
         if account:
+            # приводим дату в нужынй вид
+            data = request.data.copy()
+            for key, value in data.items():
+                if key == 'date':
+                    data[key] = datetime.strptime(data[key], "%Y-%m-%d")
+            
             data['id_account'] = account.id
+            
             portfolio = PortfolioPOSTSerializer(data=data)
             if portfolio.is_valid():
                 portfolio.save()
+                
+                response_serializer = PortfolioSerializer(portfolio)
+                
+                return Response(response_serializer.data, status=status.HTTP_201_CREATED)
             else:
                 return Response(portfolio.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            return Response({'id': portfolio.instance.id}, status=status.HTTP_201_CREATED)
+            
         else:
             return Response({'error': 'No account found'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -94,18 +104,31 @@ class PortfolioAPIUpdate(APIView):
             
             if account:
                 portfolio = Portfolio.objects.filter(id=self.kwargs['id']).first()
-
-                serializer = PortfolioSerializer(
-                    data=request.data, instance=portfolio, partial=True)
+                
+                # приводим дату в нужынй вид
+                data = request.data.copy()
+                for key, value in data.items():
+                    if key == 'date':
+                        data[key] = datetime.strptime(data[key], "%Y-%m-%d")
+                
+                serializer = PortfolioPOSTSerializer(
+                    data=data, instance=portfolio, partial=True)
                 
                 serializer.is_valid(raise_exception=True)
-                serializer.save()
+                portfolio_serializer = serializer.save()
+                
+                print('request.data:', request.data)
+                print('portfolio:', portfolio.date)
+                
+                response_serializer = PortfolioSerializer(portfolio_serializer)
+                
+                return Response(response_serializer.data)
             else:
                 return Response({'error': "No data"})
         else:
             return Response({'error': "No token"})
 
-        return Response(serializer.data)
+        
 
     serializer_class = PortfolioSerializer
     

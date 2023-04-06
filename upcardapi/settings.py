@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     # my
     'api.apps.ApiConfig',
     'authorization.apps.AuthorizationConfig',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -59,6 +61,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'upcardapi.urls'
 AUTH_USER_MODEL = 'api.Account'
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# CORS_ORIGIN_WHITELIST = [
+#     'http://192.168.0.10:8080',
+#     'http://localhost:8080',
+#     'http://127.0.0.1:8080'
+#     # ...
+# ]
+
+CORS_ALLOW_CREDENTIALS = True
+
 
 TEMPLATES = [
     {

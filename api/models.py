@@ -32,14 +32,14 @@ class Image(models.Model):
 
 class Social(models.Model):
     """Модель для хранения соц сетей"""
-    tg = models.CharField('tg', max_length=250, blank=True, null=True)
+    telegram = models.CharField('telegram', max_length=250, blank=True, null=True)
     vk = models.CharField('vk', max_length=250, blank=True, null=True)
     instagram = models.CharField('instagram', max_length=250, blank=True, null=True)
     whatsapp = models.CharField('whatsapp', max_length=250, blank=True, null=True)
     gmail = models.CharField('gmail', max_length=250, blank=True, null=True)
     facebook = models.CharField('facebook', max_length=250, blank=True, null=True)
     yandex = models.CharField('yandex', max_length=250, blank=True, null=True)
-    odnoclassniki = models.CharField('odnoclassniki', max_length=250, blank=True, null=True)
+    odnoklassniki = models.CharField('odnoklassniki', max_length=250, blank=True, null=True)
     skype = models.CharField('skype', max_length=250, blank=True, null=True)
     youtube = models.CharField('youtube', max_length=250, blank=True, null=True)
     github = models.CharField('github', max_length=250, blank=True, null=True)
@@ -142,6 +142,7 @@ class CompanyInfo(models.Model):
     address = models.CharField('Адрес', max_length=250, blank=True)
     
     id_social = models.ForeignKey(Social, on_delete=models.SET_NULL, blank=True, null=True)
+    logo_img = models.ImageField(upload_to="media/", null=True, blank=True)
     
     date_create = models.DateTimeField('Дата создания', auto_now_add=True)
     date_update =models.DateTimeField('Дата обновления', auto_now_add=True)
@@ -169,7 +170,9 @@ class Card(models.Model):
     address = models.CharField('Адрес', max_length=250, blank=True)
     qr = models.CharField('QR', max_length=250, blank=True)
     
-    id_img = models.ManyToManyField(Image, blank=True)
+    # id_img = models.ManyToManyField(Image, blank=True)
+    personal_img = models.ImageField(upload_to="media/", null=True, blank=True)
+    logo_img = models.ImageField(upload_to="media/", null=True, blank=True)
     id_company_info = models.ForeignKey(CompanyInfo, on_delete=models.SET_NULL, blank=True, null=True)
     
     id_social = models.ForeignKey(Social, on_delete=models.SET_NULL, blank=True, null=True)
@@ -189,18 +192,18 @@ class Card(models.Model):
         
 class Portfolio(models.Model):
     """Модель портфолио"""
-    email = models.CharField('Почта', max_length=250, blank=True)
+    name = models.CharField('Название', max_length=250, blank=True)
     date = models.DateTimeField('Дата', auto_now_add=True)
     description = models.CharField('Описание', max_length=250, blank=True, null=True)
     
-    id_img = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True)
+    img = models.ImageField(upload_to="media/", null=True, blank=True)
     id_card = models.ForeignKey(Card, on_delete=models.SET_NULL, blank=True, null=True)
     
     date_create = models.DateTimeField('Дата создания', auto_now_add=True)
     date_update =models.DateTimeField('Дата обновления', auto_now_add=True)
 
     def __str__(self):
-        return self.email
+        return self.name
 
     class Meta:
         verbose_name = 'Портфолио'

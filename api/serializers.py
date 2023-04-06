@@ -48,17 +48,29 @@ class CalendarSerializer(serializers.ModelSerializer):
 # ----------------------------------------------------------------
 
 class CompanyInfoSerializer(serializers.ModelSerializer):
-    id_social = SocialSerializer()
+    id_social = SocialSerializer(required=False)
     
     class Meta:
         model = CompanyInfo
         fields = '__all__'
         
-class CompanyPOSTInfoSerializer(serializers.ModelSerializer):
-    
+class CompanyInfoPOSTSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = CompanyInfo
         fields = '__all__'
+        
+
+        
+# ----------------------------------------------------------------
+# IMAGE SERIALIZERS
+# ----------------------------------------------------------------
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = '__all__'
+        
         
 # ----------------------------------------------------------------
 # CARD SERIALIZERS
@@ -66,10 +78,10 @@ class CompanyPOSTInfoSerializer(serializers.ModelSerializer):
 
 class CardSerializer(serializers.ModelSerializer):
     
-    id_social = SocialSerializer()
-    id_appearance = AppearanceSerializer()
-    id_account = AccountSerializer()
-    id_company_info = CompanyInfoSerializer()
+    id_social = SocialSerializer(required=False)
+    id_appearance = AppearanceSerializer(required=False)
+    id_account = AccountSerializer(required=False)
+    id_company_info = CompanyInfoSerializer(required=False)
     
     class Meta:
         model = Card
@@ -86,24 +98,14 @@ class CardPOSTSerializer(serializers.ModelSerializer):
 # ----------------------------------------------------------------
 
 class PortfolioSerializer(serializers.ModelSerializer):
-    id_card = CardSerializer()
+    id_card = CardSerializer(required=False)
     class Meta:
         model = Portfolio
         fields = '__all__'
-        
         
 class PortfolioPOSTSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Portfolio
         fields = '__all__'
+    
         
-        
-# ----------------------------------------------------------------
-# IMAGE SERIALIZERS
-# ----------------------------------------------------------------
-
-class ImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Image
-        fields = '__all__'

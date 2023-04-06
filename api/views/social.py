@@ -30,14 +30,14 @@ class SocialAPIPost(APIView):
         data = request.data
         
         if account:
-            data['id_account'] = account.id
+            # data['id_account'] = account.id
             social = SocialSerializer(data=data)
             if social.is_valid():
                 social.save()
+                
+                return Response(social.data, status=status.HTTP_201_CREATED)
             else:
-                return Response(social.errors, status=status.HTTP_400_BAD_REQUEST)
-
-            return Response({'id': social.instance.id}, status=status.HTTP_201_CREATED)
+                return Response(social.errors, status=status.HTTP_400_BAD_REQUEST)  
         else:
             return Response({'error': 'No account found'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -73,18 +73,26 @@ class SocialAPIUpdate(APIView):
             account = Account.objects.filter(token=token).first()
             
             if account:
-                social = Portfolio.objects.filter(id=self.kwargs['id']).first()
+                social = Social.objects.filter(id=self.kwargs['id']).first()
+                
+                data = request.data.copy()
+                for key, value in data.items():
+                    if value == 'null':
+                        data[key] = None
 
                 serializer = SocialSerializer(
-                    data=request.data, instance=social, partial=True)
+                    data=data, instance=social, partial=True)
                 
                 serializer.is_valid(raise_exception=True)
                 serializer.save()
+                
+                
+                return Response(serializer.data)
             else:
                 return Response({'error': "No data"})
         else:
             return Response({'error': "No token"})
 
-        return Response(serializer.data)
+        
 
     serializer_class = SocialSerializer

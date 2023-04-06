@@ -60,6 +60,15 @@ class CardAdmin(admin.ModelAdmin):
     list_filter = ()
     fieldsets = ()
     
+class ImageAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Image._meta.fields]
+    search_fields = list([field.name for field in Image._meta.fields])
+
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
+    
+    
 admin.site.register(Card, CardAdmin)
 admin.site.register(Appearance, AppearanceAdmin)
 admin.site.register(CompanyInfo, CompanyInfoAdmin)
@@ -67,3 +76,4 @@ admin.site.register(Calendar, CalendarAdmin)
 admin.site.register(Portfolio, PortfolioAdmin)
 admin.site.register(Social, SocialAdmin)
 admin.site.register(Account, AccountAdmin)
+admin.site.register(Image, ImageAdmin)
