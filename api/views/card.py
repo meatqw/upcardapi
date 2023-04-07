@@ -83,6 +83,24 @@ class CardAPIView(viewsets.ReadOnlyModelViewSet):
             raise ValidationError("No Token")
 
     serializer_class = CardSerializer
+    
+    
+class CardByLinkAPIView(viewsets.ReadOnlyModelViewSet):
+    """Получить карточку по link"""
+
+    def get_queryset(self):
+        if "link" in self.request.GET:
+            link = self.request.GET['link']
+            card = Card.objects.filter(link=link).first()
+
+            if card:
+                return card
+            else:
+                raise Http404("No Data")
+        else:
+            raise ValidationError("No link")
+
+    serializer_class = CardSerializer
 
 
 class CardAPIUpdate(APIView):

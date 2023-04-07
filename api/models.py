@@ -168,7 +168,7 @@ class Card(models.Model):
     email = models.CharField('Почта', max_length=250, blank=True)
     dob = models.DateTimeField('Дата рождения', auto_now_add=True)
     address = models.CharField('Адрес', max_length=250, blank=True)
-    qr = models.CharField('QR', max_length=250, blank=True)
+    link = models.CharField('link', max_length=250, blank=True)
     
     # id_img = models.ManyToManyField(Image, blank=True)
     personal_img = models.ImageField(upload_to="media/", null=True, blank=True)

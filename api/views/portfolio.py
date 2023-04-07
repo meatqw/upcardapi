@@ -91,6 +91,25 @@ class PortfolioByCardAPIView(viewsets.ReadOnlyModelViewSet):
             raise ValidationError("No Token")
 
     serializer_class = PortfolioSerializer
+    
+
+class PortfolioByCardNoTokenAPIView(viewsets.ReadOnlyModelViewSet):
+    """Получить портфолио по id card"""
+
+    def get_queryset(self):
+        if "id_card" in self.request.GET:
+            id_card = self.request.GET['id_card']
+            portfolio = Portfolio.objects.filter(id_card=self.kwargs['id_card']).all()
+            
+            if portfolio:
+                
+                return portfolio
+            else:
+                raise Http404("No Data")
+        else:
+            raise ValidationError("No Id Card")
+
+    serializer_class = PortfolioSerializer
 
 
 class PortfolioAPIUpdate(APIView):

@@ -19,6 +19,8 @@
 | api/v1/card/ | Получить все карточки пользователя (GET) или добавить новую (POST) |
 | api/v1/card/<int:pk> | Получить карточку по ID (GET) |
 | api/v1/cardUpdate/<int:pk> | Обновить карточку по ID (PATCH) |
+| api/v1/cardLink/<int:pk> | Обновить карточку по LINK (GET) (v0.3) |
+
 
 - PORTFOLIO
 
@@ -29,6 +31,8 @@
 | api/v1/portfolioByCard/<int:id_card> | Получить все елементы по ID карточки (GET) |
 | api/v1/portfolioUpdate/<int:id> | Обновить порфолио по ID (PATCH) |
 | api/v1/portfolioDelete/<int:id> | Удалить порфолио по ID (DELETE) |
+| api/v1/portfolioCard/ | Получить элемент портфолио по id_card (GET) (v0.3) |
+
 
 - IMAGE
 
@@ -56,3 +60,7 @@
 - Небольшие изменения представлений
 - небольшие изменения моделей
 - небольшие изменения сериализаторов 
+
+# v0.3 
+- новые роуты для card.domain (для домена просмота карт)
+- Изменеия можно посмотреть в v0.2 (API)

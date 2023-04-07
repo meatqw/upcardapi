@@ -10,6 +10,8 @@ urlpatterns = [
     path('card/', CardsAPIView.as_view()),
     path('card/<int:id>', CardAPIView.as_view({'get': 'list'})),
     path('cardUpdate/<int:id>', CardAPIUpdate.as_view()),
+    path('cardLink/', CardByLinkAPIView.as_view({'get': 'list'})),
+    
     
     # company
     path('company/', CompanyAPIPost.as_view()),
@@ -22,6 +24,8 @@ urlpatterns = [
     path('portfolioByCard/<int:id_card>', PortfolioByCardAPIView.as_view({'get': 'list'})),
     path('portfolioUpdate/<int:id>', PortfolioAPIUpdate.as_view()),
     path('portfolioDelete/<int:id>', PortfolioAPIDelete.as_view()),
+    path('portfolioCard/', PortfolioByCardNoTokenAPIView.as_view({'get': 'list'})),
+    
     
     # social
     path('social/', SocialAPIPost.as_view()),
