@@ -82,6 +82,8 @@ class CardSerializer(serializers.ModelSerializer):
     id_appearance = AppearanceSerializer(required=False)
     id_account = AccountSerializer(required=False)
     id_company_info = CompanyInfoSerializer(required=False)
+    id_appearance = AppearanceSerializer(required=False)
+    
     
     class Meta:
         model = Card

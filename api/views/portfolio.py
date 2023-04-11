@@ -99,7 +99,7 @@ class PortfolioByCardNoTokenAPIView(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         if "id_card" in self.request.GET:
             id_card = self.request.GET['id_card']
-            portfolio = Portfolio.objects.filter(id_card=self.kwargs['id_card']).all()
+            portfolio = Portfolio.objects.filter(id_card=id_card).all()
             
             if portfolio:
                 

@@ -75,7 +75,7 @@ class CardAPIView(viewsets.ReadOnlyModelViewSet):
             if account:
                 cards = Card.objects.filter(
                     id_account=account, id=self.kwargs['id']).all()
-
+                
                 return cards
             else:
                 raise Http404("No Data")
@@ -91,8 +91,8 @@ class CardByLinkAPIView(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         if "link" in self.request.GET:
             link = self.request.GET['link']
-            card = Card.objects.filter(link=link).first()
-
+            card = Card.objects.filter(link=link).all()
+            
             if card:
                 return card
             else:

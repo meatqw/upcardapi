@@ -64,6 +64,7 @@ class Social(models.Model):
 class Appearance(models.Model):
     """Модель внешного вида карточки"""
     name = models.CharField('Наименование', max_length=250, blank=True)
+    style = models.JSONField('Стиль', blank=True, null=True)
     date_create = models.DateTimeField('Дата создания', auto_now_add=True)
     date_update =models.DateTimeField('Дата обновления', auto_now_add=True)
 
