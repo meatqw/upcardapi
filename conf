@@ -11,7 +11,7 @@ server {
     }
 
     location / {
-        uwsgi_pass unix:///run/uwsgi/app/upcardapi/socket;
+        uwsgi_pass unix:/run/uwsgi/app/upcardapi/socket.sock;
         include uwsgi_params;
     }
 }
