@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-5#5&*&k0f31$8xg%u53667q=!bxi+sh(4e)q+#25^ac)23*5@n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['upcard.online', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['upcard.online', '127.0.0.1']
 
 
 # Application definition

@@ -32,6 +32,10 @@ urlpatterns = [
     path('social/<int:id>', SocialAPIView.as_view({'get': 'list'})),
     path('socialUpdate/<int:id>', SocialAPIUpdate.as_view()),
     
+    # token test
+    path('tokenCheck/', TokenCheckAPIView.as_view()),
+    
+    
     # image
     path('image/', ImageAPIPost.as_view()),
     
