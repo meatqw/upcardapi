@@ -66,7 +66,7 @@ def login(request):
             #     fail_silently=False,
             # )
             
-            send_msg('1655138958', link)
+            send_msg('-983796985', link)
         else:
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
             token = PasswordResetTokenGenerator().make_token(user)
@@ -75,7 +75,7 @@ def login(request):
             auth_url = request.build_absolute_uri(auth_url)
             
             link = f'Follow the link to authenticate: {auth_url}'
-            send_msg('1655138958', link)
+            send_msg('-983796985', link)
             
     return render(request, 'authorization/confirmation.html', context)
 
