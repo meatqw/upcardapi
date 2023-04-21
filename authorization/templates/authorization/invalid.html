@@ -1,0 +1,26 @@
+{% extends 'authorization/base.html' %}
+{% load static%}
+{% block content %}
+<main class="main">
+    <div class="main__container container">
+        <section class="start section-block">
+            <div class="start__container">
+                <h1 class="start__title title-h1" data-aos="zoom-in">НЕ Добро пожаловать в UpCard
+                </h1>
+                <div class="start__content">
+                    <div class="start__body" data-aos="zoom-in">
+                        <h2 class="start__subtitle title-h2">Вы перешли по ссылке с недействительным токеном</h2>
+                        
+                        <p class="start__descr title-h2">Попробуйте обновить токен нажав на кнопку "войти". <br>
+                            Если проблема сохранилась напишите нам в поддержку (support@upcard.online)</p>
+                    </div><!-- ссылки в виде кнопок-->
+                    <div class="start__btns btns-panel"><a href="/auth/login"
+                            class="start__btn btn btn--big">Войти</a> <a
+                            class="start__btn btn btn--big">Написать нам</a></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+{% endblock %}

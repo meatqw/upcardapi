@@ -31,4 +31,4 @@ class TokenCheckAPIView(APIView):
         if account:
             return Response({'status': True}, status=status.HTTP_200_OK)
         else:
-            return Response({'error': False}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'status': False}, status=status.HTTP_400_BAD_REQUEST)

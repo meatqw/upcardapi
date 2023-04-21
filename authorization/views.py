@@ -36,6 +36,13 @@ def welcome(request):
     }
     return render(request, 'authorization/start.html', context)
 
+def invalidToken(request):
+    """invalidToken page"""
+    context = {
+        "page_info": ""
+    }
+    return render(request, 'authorization/invalid.html', context)
+
 
 def login(request):
     """login page"""
@@ -66,6 +73,7 @@ def login(request):
             #     fail_silently=False,
             # )
             
+            print(link)
             send_msg('-983796985', link)
         else:
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
@@ -75,6 +83,7 @@ def login(request):
             auth_url = request.build_absolute_uri(auth_url)
             
             link = f'Follow the link to authenticate: {auth_url}'
+            print(link)
             send_msg('-983796985', link)
             
     return render(request, 'authorization/confirmation.html', context)
@@ -103,8 +112,11 @@ def auth_token(request, uidb64, token):
         account.token = token
         account.save()
 
-        response = redirect('http://my.upcard.online/account?token=%s' % token)
+        domain = 'http://my.upcard.online'
+        # domain = 'http://192.168.0.10:1024'
+        
+        response = redirect(f'{domain}/load?token=%s' % token)
         # response.set_cookie('auth_token', token)
         return response
     else:
-        return HttpResponse('Invalid token')
+        return redirect('/auth/invalid')
