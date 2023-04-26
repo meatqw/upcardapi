@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # my
     'api.apps.ApiConfig',
     'authorization.apps.AuthorizationConfig',
+    'landing.apps.LandingConfig',
     
 ]
 

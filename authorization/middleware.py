@@ -8,6 +8,6 @@ class Redirect404Middleware:
         response = self.get_response(request)
 
         if response.status_code == 404:
-            return redirect('/auth/welcome')
+            return redirect('/auth/welcome/')
 
         return response

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru" class="page">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="shortcut icon" href="{% static 'landing/favicon.ico' %}" type="image/x-icon">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#313131">
+  <title>UpCard — Ваша электронная визитка</title>
+  <link rel="stylesheet" href="{% static 'landing/css/vendor.css' %}">
+  <link rel="stylesheet" href="{% static 'landing/css/main.css' %}">
+  <link href="{% static 'landing/fontawesome-free-6.2.1-web/css/fontawesome.css' %}" rel="stylesheet">
+  <link href="{% static 'landing/fontawesome-free-6.2.1-web/css/brands.css' %}" rel="stylesheet">
+  <link href="{% static 'landing/fontawesome-free-6.2.1-web/css/solid.css' %}" rel="stylesheet">
+  <link href="{% static 'landing/fontawesome-free-6.2.1-web/css/regular.css' %}" rel="stylesheet">
+  <script defer="defer" src="{% static 'landing/js/main.js' %}"></script>
+</head>
+
+<body class="page__body">
+  <div class="site-container">
+    <header class="header">
+      <div class="header__container container-fluid"><button class="btn-reset burger" aria-label="Открыть меню"
+          aria-expanded="false" data-burger><span class="burger__line"></span> <span class="burger__line"></span> <span
+            class="burger__line"></span></button>
+        <nav class="nav" title="Главное меню" data-menu>
+          <ul class="list-reset nav__list">
+            <li class="nav__item"><a href="#instruction" class="nav__link" data-menu-item data-scroll>Как все
+                работает</a></li>
+            <li class="nav__item"><a href="#advantages" class="nav__link" data-menu-item data-scroll>Возможности
+                визитки</a></li>
+            <li class="nav__item"><a href="#share" class="nav__link" data-menu-item data-scroll>Как делиться</a></li>
+            <li class="nav__item"><a href="#information" class="nav__link" data-menu-item data-scroll>Информация</a>
+            </li>
+            <li class="nav__item"><a href="#portfolio" class="nav__link" data-menu-item data-scroll>Примеры визиток</a>
+            </li>
+            <li class="nav__item"><a href="#tariff" class="nav__link" data-menu-item data-scroll>Тарифы</a></li>
+            <li class="nav__item"><a href="/auth/welcome/" class="btn-reset btn btn--header nav__btn">Зарегистрироваться</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="main">
+      <section class="hero section-block">
+        <div class="hero__container container container--big">
+          <h1 class="hero-title hero__title"><span class="hero-title__logo logo"><span class="logo__left">Up</span>
+              <span class="logo__right">Card</span> </span><span class="hero-title__text">В<span>а</span>ша электронная
+              визитка</span></h1>
+          <div class="hero__block block-illumination glass-style" data-aos="zoom-in">
+            <div class="hero__descr">
+              <p>Российский сервис, который позволит вам создать визитку и управлять ее из мобильного приложения.</p>
+              <p>Отправляйте визитку из приложения по email и мессенджеры, делитесь через QR-код.</p>
+            </div><a href="/auth/welcome/" class="hero__btn btn">Зарегистрироваться</a>
+          </div>
+        </div>
+      </section>
+      <section class="instruction section-block" id="instruction">
+        <div class="instruction__container container">
+          <h2 class="title-section title-h2">Как использовать электронную визитку</h2>
+          <ul class="list-reset instruction__list">
+            <li class="instruction__item instruction-item">
+              <div class="instruction-item__img">
+                <picture>
+                  <source srcset="{% static 'landing/img/instruction/1.avif' %}" type="image/avif">
+                  <source srcset="{% static 'landing/img/instruction/1.webp' %}" type="image/webp"><img loading="lazy"
+                    src="{% static 'landing/img/instruction/1.png' %}" class="image" width="385" height="250"
+                    alt="peace">
+                </picture>
+              </div>
+              <div class="instruction-item__block glass-style" data-aos="zoom-in">
+                <h3 class="instruction-item__title title-h3">1. Оформление подписки</h3>
+                <p class="instruction-item__descr text-regular">Вы приобретаете подписку. Это можно сделать у нас
+                  на сайте или написать в поддержку, где вам могут предложить альтернативные решения.</p>
+              </div>
+            </li>
+            <li class="instruction__item instruction-item">
+              <div class="instruction-item__img instruction-item__img--second">
+                <picture>
+                  <source srcset="{% static 'landing/img/instruction/2.avif' %}" type="image/avif">
+                  <source srcset="{% static 'landing/img/instruction/2.webp' %}" type="image/webp"><img loading="lazy"
+                    src="{% static 'landing/img/instruction/2.png' %}" class="image" width="359" height="302"
+                    alt="pencil">
+                </picture>
+              </div>
+              <div class="instruction-item__block instruction-item__block--second glass-style block-illumination"
+                data-aos="zoom-in">
+                <h3 class="instruction-item__title title-h3">2. Зайти в личный кабинет</h3>
+                <p class="instruction-item__descr text-regular">После вам будет необходимо зайти в ваш личный кабинет,
+                  чтобы вы могли использовать все возможности вашей новой визитной карты.</p><a href="/auth/welcome/"
+                  class="instruction-item__btn btn">Войти в личный кабинет</a>
+              </div>
+            </li>
+            <li class="instruction__item instruction-item">
+              <div class="instruction-item__img instruction-item__img--third">
+                <picture>
+                  <source srcset="{% static 'landing/img/instruction/3.avif' %}" type="image/avif">
+                  <source srcset="{% static 'landing/img/instruction/3.webp' %}" type="image/webp"><img loading="lazy"
+                    src="{% static 'landing/img/instruction/3.png' %}" class="image" width="359" height="302"
+                    alt="pencil">
+                </picture>
+              </div>
+              <div class="instruction-item__block glass-style" data-aos="zoom-in">
+                <h3 class="instruction-item__title title-h3">3. Использовать продукт</h3>
+                <p class="instruction-item__descr text-regular">После нескольких достаточно простых шагов вы можете
+                  полноценно использовать вашу новую визитку, изменять, делиться и многое другое.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="advantages section-block" id="advantages">
+        <div class="advantages__container container">
+          <h2 class="title-section title-h2">Возможности электронной визитки</h2>
+          <ul class="list-reset advantages__list" data-aos="zoom-in">
+            <li class="advantages__item advantages-item">
+              <div class="advantages-item__top">
+                <div class="advantages-item__icon animation-icon"><i class="fa-solid fa-floppy-disk"></i></div>
+                <h3 class="advantages-item__title title-h3">Моментальное сохранение контакта</h3>
+              </div>
+              <p class="advantages-item__descr text-regular">Делитесь своей визиткой напрямую через смартфон. Ваш
+                контакт не потребуется сохранять вручную</p>
+            </li>
+            <li class="advantages__item advantages-item">
+              <div class="advantages-item__top">
+                <div class="advantages-item__icon animation-icon"><i class="fa-solid fa-comments"></i></div>
+                <h3 class="advantages-item__title title-h3">Формат для мессенджеров</h3>
+              </div>
+              <p class="advantages-item__descr text-regular">Делитесь своей визиткой напрямую через смартфон. Ваш
+                контакт не потребуется сохранять вручную</p>
+            </li>
+            <li class="advantages__item advantages-item">
+              <div class="advantages-item__top">
+                <div class="advantages-item__icon animation-icon"><i class="fa-solid fa-wrench"></i></div>
+                <h3 class="advantages-item__title title-h3">Расскажите о своем роде деятельности</h3>
+              </div>
+              <p class="advantages-item__descr text-regular">Информация о вашей компании или специализации: описание,
+                ссылки, отзывы, портфолио и мн. другое</p>
+            </li>
+            <li class="advantages__item advantages-item">
+              <div class="advantages-item__top">
+                <div class="advantages-item__icon animation-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <h3 class="advantages-item__title title-h3">Покажите свое портфолио</h3>
+              </div>
+              <p class="advantages-item__descr text-regular">В визитке расположена страница с вашим портфолио, куда
+                вы можете добавлять работы через личный кабинет</p>
+            </li>
+            <li class="advantages__item advantages-item">
+              <div class="advantages-item__top">
+                <div class="advantages-item__icon animation-icon"><i class="fa-solid fa-link"></i></div>
+                <h3 class="advantages-item__title title-h3">Ссылка на сайт или оплату</h3>
+              </div>
+              <p class="advantages-item__descr text-regular">Добавьте ссылку на свой сайт, а также ссылки на оплату
+                ваших услуг</p>
+            </li>
+            <li class="advantages__item advantages-item">
+              <div class="advantages-item__top">
+                <div class="advantages-item__icon animation-icon"><i class="fa-solid fa-phone-slash"></i></div>
+                <h3 class="advantages-item__title title-h3">Моментальная связь в мессенджерах</h3>
+              </div>
+              <p class="advantages-item__descr text-regular">Связь через мессенджеры без предварительного добавления
+                контакта</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="share section-block" id="share">
+        <div class="share__container container">
+          <h2 class="title-section title-h2">Как делиться электронной визиткой</h2>
+          <ul class="list-reset share__list">
+            <li class="share__item share-item">
+              <div class="share-item__pictures">
+                <div class="share-item__img share-item__img--screen" data-aos="zoom-in">
+                  <picture>
+                    <source srcset="{% static 'landing/img/share/1.avif' %}" type="image/avif">
+                    <source srcset="{% static 'landing/img/share/1.webp' %}" type="image/webp"><img loading="lazy"
+                      src="{% static 'landing/img/share/1.png' %}" class="image" alt="mainpage">
+                  </picture>
+                </div>
+                <div class="share-item__img share-item__img share-item__img--mascot">
+                  <picture>
+                    <source srcset="{% static 'landing/img/share/3.avif' %}" type="image/avif">
+                    <source srcset="{% static 'landing/img/share/3.webp' %}" type="image/webp"><img loading="lazy"
+                      src="{% static 'landing/img/share/3.png' %}" class="image" width="266" height="300"
+                      alt="mainpage">
+                  </picture>
+                </div>
+              </div>
+              <div class="share-item__block glass-style">
+                <h3 class="share-item__title title-h3">На расстоянии</h3>
+                <p class="share-item__descr text-regular">Отправьте визитку в мессенджере, SMS или по email</p>
+              </div>
+            </li>
+            <li class="share__item share-item">
+              <div class="share-item__pictures share-item__pictures--second">
+                <div class="share-item__img share-item__img--screen" data-aos="zoom-in">
+                  <picture>
+                    <source srcset="{% static 'landing/img/share/2.avif' %}" type="image/avif">
+                    <source srcset="{% static 'landing/img/share/2.webp' %}" type="image/webp"><img loading="lazy"
+                      src="{% static 'landing/img/share/2.png' %}" class="image" alt="mainpage">
+                  </picture>
+                </div>
+                <div class="share-item__img share-item__img share-item__img--mascot">
+                  <picture>
+                    <source srcset="{% static 'landing/img/share/4.avif' %}" type="image/avif">
+                    <source srcset="{% static 'landing/img/share/4.webp' %}" type="image/webp"><img loading="lazy"
+                      src="{% static 'landing/img/share/4.png' %}" class="image" width="266" height="300"
+                      alt="mainpage">
+                  </picture>
+                </div>
+              </div>
+              <div class="share-item__block glass-style">
+                <h3 class="share-item__title title-h3">При встрече</h3>
+                <p class="share-item__descr text-regular">Предложите отсканировать камерой смартфона QR-код вашей
+                  визитной карты. Собеседнику ничего не требуется устанавливать</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="info section-block" id="information">
+        <div class="info__container container">
+          <h2 class="title-section title-h2">Комплексное решение для всех</h2>
+          <div class="info__tabs info-tabs">
+            <div class="tabs" data-tabs="info-tabs">
+              <ul class="tabs__nav">
+                <li class="tabs__nav-item"><button class="btn-reset tabs__nav-btn title-h3" type="button">Карта
+                    в смартфоне</button></li>
+                <li class="tabs__nav-item"><button class="btn-reset tabs__nav-btn title-h3" type="button">Визитка
+                    на PC</button></li>
+                <li class="tabs__nav-item"><button class="btn-reset tabs__nav-btn title-h3" type="button">Портфолио
+                    рядом</button></li>
+                <li class="tabs__nav-item"><button class="btn-reset tabs__nav-btn title-h3"
+                    type="button">QR-cod</button></li>
+              </ul>
+              <div class="tabs__content">
+                <div class="tabs__panel">
+                  <div class="info-tabs__block">
+                    <div class="info-tabs__img info-tabs__img--second">
+                      <picture>
+                        <source srcset="{% static 'landing/img/info/2.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/info/2.webp' %}" type="image/webp"><img loading="lazy"
+                          src="{% static 'landing/img/info/2.png' %}" class="image" alt="girl with phone">
+                      </picture>
+                    </div>
+                    <div class="info-tabs__info glass-style" data-aos="zoom-in">
+                      <h3 class="info-tabs__title title-h3">Карта всегда при себе</h3>
+                      <p class="info-tabs__descr text-regular">Ваша визитная карточка всегда при вас, в вашем смартфоне.
+                        Нет необходимости предоставлять бумажные визитки, которые быстро изнашиваются или могут
+                        затеряться. Вашу визитку никогда не потеряют.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="tabs__panel">
+                  <div class="info-tabs__block">
+                    <div class="info-tabs__img info-tabs__img--third">
+                      <picture>
+                        <source srcset="{% static 'landing/img/info/1.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/info/1.webp' %}" type="image/webp"><img loading="lazy"
+                          src="{% static 'landing/img/info/1.png' %}" class="image" alt="girl at the computer">
+                      </picture>
+                    </div>
+                    <div class="info-tabs__info glass-style" data-aos="zoom-in">
+                      <h3 class="info-tabs__title title-h3">Полный функционал на всех устройствах</h3>
+                      <p class="info-tabs__descr text-regular">Наши визитные карты и приложение можно свободно
+                        использовать и на компьютере. И при необходимости вы можете легко это сделать, способ работы
+                        аналогичен работе через мобильное устройство.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="tabs__panel">
+                  <div class="info-tabs__block">
+                    <div class="info-tabs__img">
+                      <picture>
+                        <source srcset="{% static 'landing/img/info/3.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/info/3.webp' %}" type="image/webp"><img loading="lazy"
+                          src="{% static 'landing/img/info/3.png' %}" class="image" width="455" height="500"
+                          alt="girl reading a book">
+                      </picture>
+                    </div>
+                    <div class="info-tabs__info glass-style" data-aos="zoom-in">
+                      <h3 class="info-tabs__title title-h3">Портфолио всегда под рукой</h3>
+                      <p class="info-tabs__descr text-regular">Вы всегда сможете при необходимости предоставить свои
+                        работы любому человеку, одной ссылкой, и сразу с возможностью связаться с вами или посетить ваш
+                        сайт. Портфолио может быть на любую специальность.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="tabs__panel">
+                  <div class="info-tabs__block">
+                    <div class="info-tabs__img info-tabs__img--fourch">
+                      <picture>
+                        <source srcset="{% static 'landing/img/info/4.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/info/4.webp' %}" type="image/webp"><img loading="lazy"
+                          src="{% static 'landing/img/info/4.png' %}" class="image" alt="girl with QR-code">
+                      </picture>
+                    </div>
+                    <div class="info-tabs__info glass-style" data-aos="zoom-in">
+                      <h3 class="info-tabs__title title-h3">Легкий способ поделиться</h3>
+                      <p class="info-tabs__descr text-regular">Для того, чтобы предоставить свою визитную карточку
+                        собеседнику, вам необходимо просто показать личный QR-код из приложения, либо отправить ссылку
+                        своей карты.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="info__btns"><button class="btn-reset btn info__btn" onclick="location.href='/auth/welcome/'">Зарегистрироваться</button></div>
+          <ul class="list-reset info-list">
+            <li class="info-list__item">
+              <h3 class="info-list__title title-h3">Для организации</h3>
+              <div class="info-list__content">
+                <div class="info-list__img">
+                  <picture>
+                    <source srcset="{% static 'landing/img/info/5.avif' %}" type="image/avif">
+                    <source srcset="{% static 'landing/img/info/5.webp' %}" type="image/webp"><img loading="lazy"
+                      src="{% static 'landing/img/info/5.png' %}" class="image" alt="girl with tablet">
+                  </picture>
+                </div>
+                <div class="info-list__info glass-style" data-aos="zoom-in">
+                  <p class="text-regular">Снижение расходов на визитки, повышение эффективности работы команды</p>
+                </div>
+              </div>
+            </li>
+            <li class="info-list__item">
+              <h3 class="info-list__title title-h3">Для личного бизнеса</h3>
+              <div class="info-list__content">
+                <div class="info-list__img">
+                  <picture>
+                    <source srcset="{% static 'landing/img/info/6.avif' %}" type="image/avif">
+                    <source srcset="{% static 'landing/img/info/6.webp' %}" type="image/webp"><img loading="lazy"
+                      src="{% static 'landing/img/info/6.png' %}" class="image" alt="girl in chair with laptop">
+                  </picture>
+                </div>
+                <div class="info-list__info glass-style" data-aos="zoom-in">
+                  <p class="text-regular">Номер не попадет в спам, у клиента вся необходимая информация о тебе в одном
+                    месте</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="portfolio section-block" id="portfolio">
+        <div class="portfolio__container container container--big">
+          <h2 class="title-section title-h2 portfolio__title">Несколько примеров вашей визитки</h2><button
+            class="btn-reset swiper-button swiper-button-prev"></button>
+          <div class="swiper portfolio__swiper" data-aos="zoom-in">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="portfolio-slide portfolio-slide--second">
+                  <div class="portfolio-slide__pictures">
+                    <div class="portfolio-slide__img portfolio-slide__img--pc">
+                      <picture>
+                        <source srcset="{% static 'landing/img/portfolio/1-pc.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/portfolio/1-pc.webp' %}" type="image/webp"><img
+                          loading="lazy" src="{% static 'landing/img/portfolio/1-pc.png' %}" class="image" width=""
+                          height="" alt="">
+                      </picture>
+                    </div>
+                    <div class="portfolio-slide__img portfolio-slide__img--mob">
+                      <picture>
+                        <source srcset="{% static 'landing/img/portfolio/1-mobile.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/portfolio/1-mobile.webp' %}" type="image/webp"><img
+                          loading="lazy" src="{% static 'landing/img/portfolio/1-mobile.png' %}" class="image" width=""
+                          height="" alt="">
+                      </picture>
+                    </div>
+                  </div>
+                  <div class="portfolio-slide__info glass-style">
+                    <p class="text-regular">Визитка компании FreelanceUp</p>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="portfolio-slide">
+                  <div class="portfolio-slide__pictures">
+                    <div class="portfolio-slide__img portfolio-slide__img--pc">
+                      <picture>
+                        <source srcset="{% static 'landing/img/portfolio/2-pc.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/portfolio/2-pc.webp' %}" type="image/webp"><img
+                          loading="lazy" src="{% static 'landing/img/portfolio/2-pc.png' %}" class="image" width=""
+                          height="" alt="">
+                      </picture>
+                    </div>
+                    <div class="portfolio-slide__img portfolio-slide__img--mob">
+                      <picture>
+                        <source srcset="{% static 'landing/img/portfolio/2-mobile.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/portfolio/2-mobile.webp' %}" type="image/webp"><img
+                          loading="lazy" src="{% static 'landing/img/portfolio/2-mobile.png' %}" class="image" width=""
+                          height="" alt="">
+                      </picture>
+                    </div>
+                  </div>
+                  <div class="portfolio-slide__info glass-style">
+                    <p class="text-regular">Вариант визитки в нейтральном стиле</p>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="portfolio-slide">
+                  <div class="portfolio-slide__pictures">
+                    <div class="portfolio-slide__img portfolio-slide__img--pc">
+                      <picture>
+                        <source srcset="{% static 'landing/img/portfolio/3-pc.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/portfolio/3-pc.webp' %}" type="image/webp"><img
+                          loading="lazy" src="{% static 'landing/img/portfolio/3-pc.png' %}" class="image" width=""
+                          height="" alt="">
+                      </picture>
+                    </div>
+                    <div class="portfolio-slide__img portfolio-slide__img--mob">
+                      <picture>
+                        <source srcset="{% static 'landing/img/portfolio/3-mobile.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/portfolio/3-mobile.webp' %}" type="image/webp"><img
+                          loading="lazy" src="{% static 'landing/img/portfolio/3-mobile.png' %}" class="image" width=""
+                          height="" alt="">
+                      </picture>
+                    </div>
+                  </div>
+                  <div class="portfolio-slide__info glass-style">
+                    <p class="text-regular">Вариант личной уникальной визитки (тату-мастер)</p>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="portfolio-slide">
+                  <div class="portfolio-slide__pictures">
+                    <div class="portfolio-slide__img portfolio-slide__img--pc">
+                      <picture>
+                        <source srcset="{% static 'landing/img/portfolio/4-pc.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/portfolio/4-pc.webp' %}" type="image/webp"><img
+                          loading="lazy" src="{% static 'landing/img/portfolio/4-pc.png' %}" class="image" width=""
+                          height="" alt="">
+                      </picture>
+                    </div>
+                    <div class="portfolio-slide__img portfolio-slide__img--mob">
+                      <picture>
+                        <source srcset="{% static 'landing/img/portfolio/4-mobile.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/portfolio/4-mobile.webp' %}" type="image/webp"><img
+                          loading="lazy" src="{% static 'landing/img/portfolio/4-mobile.png' %}" class="image" width=""
+                          height="" alt="">
+                      </picture>
+                    </div>
+                  </div>
+                  <div class="portfolio-slide__info glass-style">
+                    <p class="text-regular">Вариант личной визитки медицинского работника (стоматолог)</p>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="portfolio-slide">
+                  <div class="portfolio-slide__pictures">
+                    <div class="portfolio-slide__img portfolio-slide__img--pc">
+                      <picture>
+                        <source srcset="{% static 'landing/img/portfolio/5-pc.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/portfolio/5-pc.webp' %}" type="image/webp"><img
+                          loading="lazy" src="{% static 'landing/img/portfolio/5-pc.png' %}" class="image" width=""
+                          height="" alt="">
+                      </picture>
+                    </div>
+                    <div class="portfolio-slide__img portfolio-slide__img--mob">
+                      <picture>
+                        <source srcset="{% static 'landing/img/portfolio/5-mobile.avif' %}" type="image/avif">
+                        <source srcset="{% static 'landing/img/portfolio/5-mobile.webp' %}" type="image/webp"><img
+                          loading="lazy" src="{% static 'landing/img/portfolio/5-mobile.png' %}" class="image" width=""
+                          height="" alt="">
+                      </picture>
+                    </div>
+                  </div>
+                  <div class="portfolio-slide__info glass-style">
+                    <p class="text-regular">Вариант личной строгой визитки</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div><button class="btn-reset swiper-button swiper-button-next"></button>
+        </div>
+      </section>
+      <section class="tariff section-block" id="tariff">
+        <div class="tariff__container container">
+          <h2 class="title-section title-h2">Доступные тарифы</h2>
+          <ul class="list-reset tariff__list">
+            <li class="tariff__item tariff-item glass-style" data-aos="zoom-in">
+              <h3 class="tariff-item__title title-h3">Самозанятый</h3>
+              <div class="tariff-item__top">
+                <div class="tariff-item__value tariff-value">
+                  <div class="tariff-value__price"><span>159</span> Рублей</div>
+                  <div class="tariff-value__explanation">месяц</div>
+                </div><span class="tariff__plus"><i class="fa-solid fa-plus"></i></span>
+                <p class="tariff__descr text-regular">79 рублей за доп. визитку</p>
+              </div>
+              <div class="tariff-item__bottom">
+                <div class="tariff-item__subtitle text-regular">Вы получаете:</div>
+                <ul class="list-reset tariff-item__list">
+                  <li class="tariff-item__list-item text-little">1. Доступ к личному кабинету</li>
+                  <li class="tariff-item__list-item text-little">2. Полное управление информацией в визитке и ее внешним
+                    видом</li>
+                  <li class="tariff-item__list-item text-little">3. Возможность доработок</li>
+                  <li class="tariff-item__list-item text-little">4. Редактирование полей визитки при неизменном QR-коде
+                  </li>
+                  <li class="tariff-item__list-item text-little">5. Доступ к технической поддержке</li>
+                </ul>
+              </div>
+            </li>
+            <li class="tariff__item tariff-item glass-style" data-aos="zoom-in">
+              <h3 class="tariff-item__title title-h3">Бизнес</h3>
+              <div class="tariff-item__top">
+                <div class="tariff-item__value tariff-value">
+                  <div class="tariff-value__price"><span>499</span> Рублей</div>
+                  <div class="tariff-value__explanation">месяц</div>
+                </div><span class="tariff__plus"><i class="fa-solid fa-plus"></i></span>
+                <p class="tariff__descr text-regular">249 рублей за доп. визитку</p>
+              </div>
+              <div class="tariff-item__bottom">
+                <div class="tariff-item__subtitle text-regular">Вы получаете:</div>
+                <ul class="list-reset tariff-item__list">
+                  <li class="tariff-item__list-item text-little">1. Все, что получает <span>самозанятый</span></li>
+                  <li class="tariff-item__list-item text-little">2. Подключение нескольких аккаунтов к одному (главному)
+                    аккаунту</li>
+                  <li class="tariff-item__list-item text-little">3. Подключение эквайринга</li>
+                  <li class="tariff-item__list-item text-little">4. Единый стиль визиток в стиле компании</li>
+                  <li class="tariff-item__list-item text-little">5. Многое другое</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="section-form section-block">
+        <div class="section-form__container container">
+          <h2 class="title-section title-h2">Есть вопросы — напишите нам</h2>
+          <form action="#" class="form"><label class="form__label label"><input type="text" name="Имя"
+                class="input-reset input form__input input-name" placeholder="Иванов Иван Иванович" required>
+              <span>Напишите свое ФИО</span></label> <label class="form__label label"><input type="email" name="email"
+                class="input-reset input form__input input-email" placeholder="ivanov-ivan@mail.com" required>
+              <span>Напишите свой Email</span></label> <label class="form__label label"><input type="tel" name="телефон"
+                class="input-reset input form__input input-tel" placeholder="+7 (999)-999 99-99" required>
+              <span>Напишите свой номер телефона</span></label> <label class="form__label label"><input type="text"
+                name="название компании" class="input-reset input form__input" placeholder="Строй Сервис">
+              <span>Напишите название своей компании (при наличии)</span></label> <label
+              class="form__label label"><textarea name="" id="" cols="30" rows="5" class="input textarea"
+                placeholder="Хотелось бы уточнить несколько вопросов касательно расположения информации в визитке"
+                required></textarea> <span>Напишите вопрос</span></label>
+            <div class="form__bottom"><button class="btn-reset btn form__btn">Отправить вопрос</button>
+              <p class="form__descr text-little">Нажимая на кнопку, вы даете согласие на обработку персональных данных
+                и соглашаетесь с <a href="#" class="form__link">политикой конфиденциальности</a></p>
+            </div>
+          </form>
+        </div>
+      </section><button class="btn-reset btn btn-up btn-up__hide"><i class="fa-solid fa-chevron-up"
+          id="btnScrollTop"></i></button>
+    </main>
+    <footer class="footer">
+      <div class="footer__container container container--big">
+        <ul class="list-reset footer__list">
+          <li class="footer__item"><span class="footer__logo logo"><span class="logo__left">Up</span> <span
+                class="logo__right">Card</span></span></li>
+          <li class="footer__item">
+            <h3 class="footer__title title-h3">Контакты</h3>
+            <ul class="list-reset footer__add-list add-list">
+              <li class="add-list__item"><a href="mailto:teamdevup@gamil.com"
+                  class="add-list__link">teamdevup@gamil.com</a></li>
+              <li class="add-list__item"><a href="tel:+79833993030" class="add-list__link">+7 983 399-30-30</a></li>
+            </ul>
+          </li>
+          <li class="footer__item">
+            <h3 class="footer__title title-h3">Служба поддержки</h3>
+            <ul class="list-reset footer__add-list add-list">
+              <li class="add-list__item"><a href="mailto:miksmirnov01@gmail.com"
+                  class="add-list__link">miksmirnov01@gmail.com</a></li>
+              <li class="add-list__item"><a href="tel:+79230035803" class="add-list__link">+7 923 003-58-03</a></li>
+            </ul>
+          </li>
+          <li class="footer__item">
+            <h3 class="footer__title title-h3">Ссылки</h3>
+            <ul class="list-reset footer__add-list add-list">
+              <li class="add-list__item"><a href="#" class="add-list__link" target="_blank">Политика
+                  конфиденциальности</a></li>
+              <li class="add-list__item"><a href="#" class="add-list__link" target="_blank">Условия использования</a>
+              </li>
+              <li class="add-list__item">Изображение от <a class="add-list__link" href="https://ru.freepik.com/"
+                  target="_blank">Freepik</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="footer__bottom"><a href="#" class="footer__bottom-link">Инструкция по использованию продукта</a> <a
+            href="#" class="footer__social-link social-link animation-icon"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+      </div>
+    </footer>
+  </div><!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+  <script>$(document).ready(function () {
+      NProgress.start();
+      setTimeout(function () {
+        NProgress.done();
+      })
+    })</script>
+</body>
+
+</html>
