@@ -74,7 +74,7 @@ def login(request):
             # )
             
             print(link)
-            # send_msg('-983796985', link)
+            send_msg('-983796985', link)
         else:
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
             token = PasswordResetTokenGenerator().make_token(user)
@@ -84,7 +84,7 @@ def login(request):
             
             link = f'Follow the link to authenticate: {auth_url}'
             print(link)
-            # send_msg('-983796985', link)
+            send_msg('-983796985', link)
             
     return render(request, 'authorization/confirmation.html', context)
 
@@ -112,8 +112,8 @@ def auth_token(request, uidb64, token):
         account.token = token
         account.save()
 
-        # domain = 'http://my.upcard.online'
-        domain = 'http://192.168.0.10:1024'
+        domain = 'http://my.upcard.online'
+        # domain = 'http://192.168.0.10:1024'
         
         response = redirect(f'{domain}/load?token=%s' % token)
         # response.set_cookie('auth_token', token)
