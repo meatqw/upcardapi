@@ -137,3 +137,25 @@ class CardAPIUpdate(APIView):
         
 
     serializer_class = CardSerializer
+    
+    
+class CardAPIDelete(APIView):
+    """
+    Удалить карточку
+    """
+    def delete(self, request, id):
+        if "token" in self.request.GET:
+            token = self.request.GET['token']
+            account = Account.objects.filter(token=token).first()
+
+            if account:
+                card = Card.objects.filter(id=id).first()
+                if card:
+                    card.delete()
+                    return Response({'success': "Card deleted successfully"})
+                else:
+                    return Response({'error': "Card not found"})
+            else:
+                return Response({'error': "No data"})
+        else:
+            return Response({'error': "No token"})

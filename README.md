@@ -20,6 +20,7 @@
 | api/v1/card/<int:pk> | Получить карточку по ID (GET) |
 | api/v1/cardUpdate/<int:pk> | Обновить карточку по ID (PATCH) |
 | api/v1/cardLink/<int:pk> | Обновить карточку по LINK (GET) (v0.3) |
+| api/v1/cardDelete/<int:pk> | Удалить карточку (DELETE) (v0.6) |
 
 
 - PORTFOLIO
@@ -72,3 +73,8 @@
 
 # v0.5
 - Лендос
+
+# v0.6
+- Фикс социалок (изменения в модели Social)
+- Новый api (смотреть в v0.2) путь для удлаеия карточек
+- Фикс путей в апи
