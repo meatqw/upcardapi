@@ -5,6 +5,9 @@ class Redirect404Middleware:
         self.get_response = get_response
 
     def __call__(self, request):
+        if request.path.startswith('/api/'):
+            return self.get_response(request)
+        
         response = self.get_response(request)
 
         if response.status_code == 404:
