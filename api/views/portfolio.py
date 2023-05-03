@@ -31,9 +31,8 @@ class PortfolioAPIPost(APIView):
         if account:
             # приводим дату в нужынй вид
             data = request.data.copy()
-            for key, value in data.items():
-                if key == 'date':
-                    data[key] = datetime.strptime(data[key], "%Y-%m-%d")
+            if (len(data['date']) < 5):
+                data['date'] = None
             
             data['id_account'] = account.id
             
@@ -126,9 +125,8 @@ class PortfolioAPIUpdate(APIView):
                 
                 # приводим дату в нужынй вид
                 data = request.data.copy()
-                for key, value in data.items():
-                    if key == 'date':
-                        data[key] = datetime.strptime(data[key], "%Y-%m-%d")
+                if (len(data['date']) < 5):
+                    data['date'] = None
                 
                 serializer = PortfolioPOSTSerializer(
                     data=data, instance=portfolio, partial=True)

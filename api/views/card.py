@@ -44,10 +44,10 @@ class CardsAPIView(APIView):
         if account:
             # приводим дату в нужынй вид
             data = request.data.copy()
-            for key, value in data.items():
-                if key == 'dob':
-                    data[key] = datetime.strptime(data[key], "%Y-%m-%d")
             
+            if (len(data['dob']) < 5):
+                data['dob'] = None
+
             data['id_account'] = account.id
             
             card_serializer = CardPOSTSerializer(data=data)
@@ -118,9 +118,8 @@ class CardAPIUpdate(APIView):
                 
                 # приводим дату в нужынй вид
                 data = request.data.copy()
-                for key, value in data.items():
-                    if key == 'dob':
-                        data[key] = datetime.strptime(data[key], "%Y-%m-%d")
+                if (len(data['dob']) < 5):
+                    data['dob'] = None
                     
                 card_serialezer = CardPOSTSerializer(
                     data=data, instance=card, partial=True)

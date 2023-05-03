@@ -111,3 +111,10 @@ class PortfolioPOSTSerializer(serializers.ModelSerializer):
         fields = '__all__'
     
         
+# ----------------------------------------------------------------
+# Subscription SERIALIZERS
+# ----------------------------------------------------------------
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = '__all__'

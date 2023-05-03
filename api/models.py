@@ -101,10 +101,23 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+class Subscription(models.Model):
+    """Модель c подписками"""
+    name = models.CharField(max_length=300, blank=True)
+    price = models.IntegerField(null=False)
+    data = models.JSONField(default=dict)
+    
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписка'  
 
 class Account(AbstractBaseUser):
     email = models.EmailField(unique=True)
     token = models.CharField(max_length=200, null=True, blank=True)
+    id_subscription = models.ForeignKey(Subscription, on_delete=models.SET_NULL, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -155,7 +168,8 @@ class CompanyInfo(models.Model):
     class Meta:
         verbose_name = 'Инфо о компании'
         verbose_name_plural = 'Инфо о компании'
-        
+
+
 class Card(models.Model):
     """Модель карточки"""
     card_name = models.CharField('Наименование карточки', max_length=250, blank=True)
@@ -167,7 +181,7 @@ class Card(models.Model):
     home_phone = models.CharField('Домашний телефон', max_length=250, blank=True)
     personal_site = models.CharField('Сайт', max_length=250, blank=True)
     email = models.CharField('Почта', max_length=250, blank=True)
-    dob = models.DateTimeField('Дата рождения', auto_now_add=True)
+    dob = models.DateTimeField('Дата рождения')
     address = models.CharField('Адрес', max_length=250, blank=True)
     link = models.CharField('link', max_length=250, blank=True)
     
@@ -221,5 +235,8 @@ class Calendar(models.Model):
     class Meta:
         verbose_name = 'Календарь'
         verbose_name_plural = 'Календарь'
+        
+        
+
         
         

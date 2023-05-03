@@ -35,6 +35,11 @@ urlpatterns = [
     # token test
     path('tokenCheck/', TokenCheckAPIView.as_view()),
     
+    # subsctiption
+    path('subscriptions/', SubscriptionAPIView.as_view()),
+    
+    # account
+    path('account/', AccountAPIView.as_view()),
     
     # image
     path('image/', ImageAPIPost.as_view()),
