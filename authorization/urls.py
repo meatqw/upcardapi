@@ -7,6 +7,7 @@ urlpatterns = [
     path('login/', login, name="login"),
     path('referral/', referral, name="referral"),
     path('invalid/', invalidToken, name="invalid_token"),
+    path('sended/', emailSended, name="email_sended"),
     
     path('token/<str:uidb64>/<str:token>/', auth_token, name='auth_token'),
 ]

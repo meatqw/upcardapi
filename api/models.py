@@ -181,7 +181,7 @@ class Card(models.Model):
     home_phone = models.CharField('Домашний телефон', max_length=250, blank=True)
     personal_site = models.CharField('Сайт', max_length=250, blank=True)
     email = models.CharField('Почта', max_length=250, blank=True)
-    dob = models.DateTimeField('Дата рождения')
+    dob = models.DateTimeField('Дата рождения', null=True, blank=True)
     address = models.CharField('Адрес', max_length=250, blank=True)
     link = models.CharField('link', max_length=250, blank=True)
     

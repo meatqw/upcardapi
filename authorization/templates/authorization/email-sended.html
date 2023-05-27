@@ -1,0 +1,34 @@
+{% extends 'authorization/base.html' %}
+{% load static%}
+{% block content %}
+<main class="main">
+    <div class="main__container container">
+        <section class="start section-block">
+            <div class="start__container">
+                <h1 class="start__title title-h1" data-aos="zoom-in">Проверьте почту
+                </h1>
+                <div class="start__content">
+                    <div class="start__body" data-aos="zoom-in">
+                        <h2 class="start__subtitle title-h2">Ссылка с токеном доступа отправлена на вашу почту</h2>
+                        <ul class="list-reset start__list">
+                            {% comment %} <li class="start__item"><i class="fa-solid fa-circle-dot"></i> <span
+                                    class="text-regular">Создайте аккаунт или войдите в существующий</span></li>
+                            <li class="start__item"><i class="fa-solid fa-circle-dot"></i> <span
+                                    class="text-regular">Заполните личные данные</span></li>
+                            <li class="start__item"><i class="fa-solid fa-circle-dot"></i> <span
+                                    class="text-regular">Добавьте личную фотографию или лого компании</span>
+                            </li> {% endcomment %}
+                        </ul>
+                        {% comment %} <p class="start__descr title-h2">Можете пользоваться! Предложите партнеру отсканировать
+                            QR-код и он получит всю необходимую информацию о вас себе.</p> {% endcomment %}
+                    </div><!-- ссылки в виде кнопок-->
+                    {% comment %} <div class="start__btns btns-panel"><a href="/auth/login/"
+                            class="start__btn btn btn--big">Войти</a> 
+                            <a href="/auth/referral/" class="start__btn btn btn--big">Войти рефералом</a></div>
+                </div> {% endcomment %}
+            </div>
+        </section>
+    </div>
+</main>
+
+{% endblock %}

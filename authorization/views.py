@@ -16,18 +16,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
-import requests
+from authorization.sending import send_message_email
  
-def send_msg(id, text):
-    try:
-        token = "6183526112:AAEeN5HurcqvW4jPpMlY1Oqpog0QY2lrwTo"
-        chat_id = id
-        url_req = "https://api.telegram.org/bot" + token + "/sendMessage" + "?chat_id=" + chat_id + "&text=" + text
-        results = requests.get(url_req)
-        return results
-    except Exception as e:
-        return False
-
 
 def welcome(request):
     """Wlcome page"""
@@ -35,6 +25,13 @@ def welcome(request):
         "page_info": ""
     }
     return render(request, 'authorization/start.html', context)
+
+def emailSended(request):
+    """Email is send"""
+    context = {
+        "page_info": ""
+    }
+    return render(request, 'authorization/email-sended.html', context)
 
 def invalidToken(request):
     """invalidToken page"""
@@ -63,18 +60,12 @@ def login(request):
             # создаем постоянную ссылку авторизации
             auth_url = reverse('auth_token', kwargs={'uidb64': uidb64, 'token': token})
             auth_url = request.build_absolute_uri(auth_url)
-            link = f'Follow the link to authenticate: {auth_url}'
-            # отправляем письмо с ссылкой
-            # send_mail(
-            #     'Authorization link',
-            #     f'Follow the link to authenticate: {auth_url}',
-            #     settings.DEFAULT_FROM_EMAIL,
-            #     [email],
-            #     fail_silently=False,
-            # )
             
-            print(link)
-            send_msg('-1001744814737', link)
+            print(send_message_email(email=email, link=auth_url))
+            
+            return redirect('/auth/sended/')
+            
+            
         else:
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
             token = PasswordResetTokenGenerator().make_token(user)
@@ -82,9 +73,9 @@ def login(request):
             auth_url = reverse('auth_token', kwargs={'uidb64': uidb64, 'token': token})
             auth_url = request.build_absolute_uri(auth_url)
             
-            link = f'Follow the link to authenticate: {auth_url}'
-            print(link)
-            send_msg('-1001744814737', link)
+            print(send_message_email(email=email, link=auth_url))
+            
+            return redirect('/auth/sended/')
             
     return render(request, 'authorization/confirmation.html', context)
 
@@ -113,10 +104,10 @@ def auth_token(request, uidb64, token):
         account.save()
 
         domain = 'http://my.upcard.online'
-        # domain = 'http://192.168.0.10:1024'
+        # domain = 'http://192.168.0.12:1024'
         
         response = redirect(f'{domain}/load?token=%s' % token)
         # response.set_cookie('auth_token', token)
         return response
     else:
-        return redirect('/auth/invalid')
+        return redirect('/auth/invalid/')
