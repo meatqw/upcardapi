@@ -60,7 +60,7 @@ def login(request):
             # создаем постоянную ссылку авторизации
             auth_url = reverse('auth_token', kwargs={'uidb64': uidb64, 'token': token})
             auth_url = request.build_absolute_uri(auth_url)
-            
+            print(auth_url)
             print(send_message_email(email=email, link=auth_url))
             
             return redirect('/auth/sended/')
@@ -74,7 +74,7 @@ def login(request):
             auth_url = request.build_absolute_uri(auth_url)
             
             print(send_message_email(email=email, link=auth_url))
-            
+            print(auth_url)
             return redirect('/auth/sended/')
             
     return render(request, 'authorization/confirmation.html', context)
