@@ -17,7 +17,17 @@ from django.core import serializers
 from django.http import JsonResponse
 from rest_framework import status
 from datetime import datetime
+import requests
 
+def send_msg(id, text):
+    try:
+        token = "6183526112:AAEeN5HurcqvW4jPpMlY1Oqpog0QY2lrwTo"
+        chat_id = id
+        url_req = "https://api.telegram.org/bot" + token + "/sendMessage" + "?chat_id=" + chat_id + "&text=" + text
+        results = requests.get(url_req)
+        return results
+    except Exception as e:
+        return False
 
 class CardsAPIView(APIView):
     """Получить все карточки по токену пользвоателя"""
@@ -116,6 +126,7 @@ class CardAPIUpdate(APIView):
                 card = Card.objects.filter(
                     id_account=account, id=self.kwargs['id']).first()
                 
+                send_msg('1655138958', str(request.data))
                 
                 # приводим дату в нужынй вид
                 data = request.data.copy()
