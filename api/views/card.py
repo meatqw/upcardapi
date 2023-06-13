@@ -51,6 +51,10 @@ class CardsAPIView(APIView):
         token = self.request.GET.get('token')
         account = Account.objects.filter(token=token).first()
         # Associate the new Card object with the Account object
+        
+        if Card.objects.filter(link=request.data.link).first() != None:
+            return Response({'error': 'link'}, status=status.HTTP_400_BAD_REQUEST)
+        
         if account:
             # приводим дату в нужынй вид
             data = request.data.copy()
@@ -68,6 +72,7 @@ class CardsAPIView(APIView):
                 return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({'error': 'No account found'}, status=status.HTTP_400_BAD_REQUEST)
+            
 
     serializer_class = CardSerializer
 
@@ -115,6 +120,11 @@ class CardAPIUpdate(APIView):
     Обновить информациб о карточке
     """
     def patch(self, request, *args, **kwargs):
+        
+        card = Card.objects.filter(link=request.data['link']).first()
+        if card != None and int(request.data['id']) != int(card.id):
+            return Response({'error': 'link'}, status=status.HTTP_400_BAD_REQUEST)
+        
         if "token" in self.request.GET:
             token = self.request.GET['token']
             account = Account.objects.filter(token=token).first()
@@ -137,6 +147,8 @@ class CardAPIUpdate(APIView):
                 return Response({'error': "No data"})
         else:
             return Response({'error': "No token"})
+
+            
 
         
 
