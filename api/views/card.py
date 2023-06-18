@@ -52,7 +52,7 @@ class CardsAPIView(APIView):
         account = Account.objects.filter(token=token).first()
         # Associate the new Card object with the Account object
         
-        if Card.objects.filter(link=request.data.link).first() != None:
+        if Card.objects.filter(link=request.data['link']).first() != None:
             return Response({'error': 'link'}, status=status.HTTP_400_BAD_REQUEST)
         
         if account:
