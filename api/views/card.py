@@ -112,7 +112,7 @@ class CardByLinkAPIView(viewsets.ReadOnlyModelViewSet):
         else:
             raise ValidationError("No link")
 
-    serializer_class = CardSerializer
+    serializer_class = CardSerializerByLink
 
 
 class CardAPIUpdate(APIView):
@@ -147,11 +147,6 @@ class CardAPIUpdate(APIView):
                 return Response({'error': "No data"})
         else:
             return Response({'error': "No token"})
-
-            
-
-        
-
     serializer_class = CardSerializer
     
     

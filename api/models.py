@@ -208,7 +208,7 @@ class Card(models.Model):
 class Portfolio(models.Model):
     """Модель портфолио"""
     name = models.CharField('Название', max_length=250, blank=True)
-    date = models.DateTimeField('Дата', auto_now_add=True)
+    date = models.CharField('Подзаголовок', max_length=250)
     description = models.CharField('Описание', max_length=250, blank=True, null=True)
     
     img = models.ImageField(upload_to="media/", null=True, blank=True)

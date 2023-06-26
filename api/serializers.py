@@ -89,6 +89,19 @@ class CardSerializer(serializers.ModelSerializer):
         model = Card
         fields = '__all__'
         
+class CardSerializerByLink(serializers.ModelSerializer):
+    
+    id_social = SocialSerializer(required=False)
+    id_appearance = AppearanceSerializer(required=False)
+    # id_account = AccountSerializer(required=False)
+    id_company_info = CompanyInfoSerializer(required=False)
+    id_appearance = AppearanceSerializer(required=False)
+    
+    
+    class Meta:
+        model = Card
+        fields = '__all__'
+        
 class CardPOSTSerializer(serializers.ModelSerializer):
     
     class Meta:
