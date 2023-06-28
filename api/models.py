@@ -76,7 +76,6 @@ class Appearance(models.Model):
         verbose_name_plural = 'Дизайн карточек'
         
 
-
 class AccountManager(BaseUserManager):
     def create_user(self, email, password=None):
         if not email:
@@ -184,6 +183,7 @@ class Card(models.Model):
     dob = models.CharField('Дата рождения', max_length=100, null=True, blank=True)
     address = models.CharField('Адрес', max_length=250, blank=True)
     link = models.CharField('link', max_length=250, blank=True)
+    subcard = models.CharField('Подкарта', max_length=250, default='Портфолио', blank=True, null=True)
     
     # id_img = models.ManyToManyField(Image, blank=True)
     personal_img = models.ImageField(upload_to="media/", null=True, blank=True)

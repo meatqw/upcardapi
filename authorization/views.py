@@ -64,8 +64,6 @@ def login(request):
             print(send_message_email(email=email, link=auth_url))
             
             return redirect('/auth/sended/')
-            
-            
         else:
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
             token = PasswordResetTokenGenerator().make_token(user)

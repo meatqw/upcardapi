@@ -35,16 +35,15 @@ class PortfolioAPIPost(APIView):
             data['id_account'] = account.id
             
             portfolio = PortfolioPOSTSerializer(data=data)
+            
             if portfolio.is_valid():
                 portfolio.save()
                 
-                response_serializer = PortfolioSerializer(portfolio)
+                # response_serializer = PortfolioSerializer(data)
                 
-                return Response(response_serializer.data, status=status.HTTP_201_CREATED)
+                return Response(portfolio.data, status=status.HTTP_201_CREATED)
             else:
                 return Response(portfolio.errors, status=status.HTTP_400_BAD_REQUEST)
-
-            
         else:
             return Response({'error': 'No account found'}, status=status.HTTP_400_BAD_REQUEST)
 
