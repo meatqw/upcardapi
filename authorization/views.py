@@ -60,9 +60,11 @@ def login(request):
             # создаем постоянную ссылку авторизации
             auth_url = reverse('auth_token', kwargs={'uidb64': uidb64, 'token': token})
             auth_url = request.build_absolute_uri(auth_url)
-            print(auth_url)
-            print(send_message_email(email=email, link=auth_url))
-            
+            try:
+                print(auth_url)
+                print(send_message_email(email=email, link=auth_url))
+            except Exception as e:
+                pass
             return redirect('/auth/sended/')
         else:
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
@@ -71,20 +73,22 @@ def login(request):
             auth_url = reverse('auth_token', kwargs={'uidb64': uidb64, 'token': token})
             auth_url = request.build_absolute_uri(auth_url)
             
-            print(send_message_email(email=email, link=auth_url))
-            print(auth_url)
+            try:
+                print(auth_url)
+                print(send_message_email(email=email, link=auth_url))
+            except Exception as e:
+                pass
             return redirect('/auth/sended/')
             
     return render(request, 'authorization/confirmation.html', context)
 
 
 def referral(request):
-
+    """Referral auth page"""
     context = {
         "page_info": "Введите реферальную ссылку"
     }
 
-    """Referral auth page"""
     return render(request, 'authorization/confirmation-referral.html', context)
 
 
@@ -105,7 +109,6 @@ def auth_token(request, uidb64, token):
         # domain = 'http://192.168.0.12:1024'
         
         response = redirect(f'{domain}/load?token=%s' % token)
-        # response.set_cookie('auth_token', token)
         return response
     else:
         return redirect('/auth/invalid/')
