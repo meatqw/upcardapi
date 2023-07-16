@@ -27,7 +27,7 @@ class TokenCheckAPIView(APIView):
         if not token:
             return Response({'status': False}, status=status.HTTP_400_BAD_REQUEST)
         
-        account = Account.objects.filter(token=token).first()
+        account = Account.objects.filter(token=token, is_active=True).first()
         if account:
             return Response({'status': True}, status=status.HTTP_200_OK)
         else:
