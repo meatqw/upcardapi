@@ -1,6 +1,4 @@
 from rest_framework import serializers
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
 
 from api.models import *
 
@@ -84,7 +82,6 @@ class CardSerializer(serializers.ModelSerializer):
     id_company_info = CompanyInfoSerializer(required=False)
     id_appearance = AppearanceSerializer(required=False)
     
-    
     class Meta:
         model = Card
         fields = '__all__'
@@ -113,7 +110,7 @@ class CardPOSTSerializer(serializers.ModelSerializer):
 # ----------------------------------------------------------------
 
 class PortfolioSerializer(serializers.ModelSerializer):
-    id_card = CardSerializer(required=False)
+    # id_card = CardSerializer(required=False)
     class Meta:
         model = Portfolio
         fields = '__all__'

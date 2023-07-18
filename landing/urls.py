@@ -1,5 +1,4 @@
-from django.urls import path, include, re_path
-# from rest_framework_simplejwt.views import TokenVerifyView, TokenRefreshView, TokenObtainPairView
+from django.urls import path
 from landing.views import *
 
 urlpatterns = [
