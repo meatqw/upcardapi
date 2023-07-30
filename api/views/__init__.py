@@ -8,3 +8,4 @@ from .portfolio import *
 from .image import *
 from .token import *
 from .subscription import *
+from .subscribe import *

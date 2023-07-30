@@ -128,3 +128,12 @@ class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription
         fields = '__all__'
+        
+
+# ----------------------------------------------------------------
+# Subscription SERIALIZERS
+# ----------------------------------------------------------------
+class UserSubscribeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserSubsctibe
+        fields = ['id_subscription', 'price', 'card_count']

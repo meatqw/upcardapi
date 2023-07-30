@@ -25,11 +25,13 @@ urlpatterns = [
     path('portfolioDelete/<int:id>', PortfolioAPIDelete.as_view()),
     path('portfolioCard', PortfolioByCardNoTokenAPIView.as_view({'get': 'list'})),
     
-    
     # social
     path('social', SocialAPIPost.as_view()),
     path('social/<int:id>', SocialAPIView.as_view({'get': 'list'})),
     path('socialUpdate/<int:id>', SocialAPIUpdate.as_view()),
+    
+    # оформление подписки
+    path('subscribe', SubscribeAPIPost.as_view()),
     
     # token test
     path('tokenCheck', TokenCheckAPIView.as_view()),
