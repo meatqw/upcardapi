@@ -106,7 +106,7 @@ def auth_token(request, uidb64, token):
         account.save()
 
         domain = 'https://my.upcard.online'
-        # domain = 'http://192.168.0.12:1024'
+        # domain = 'http://localhost:1024/'
         
         response = redirect(f'{domain}/load?token=%s' % token)
         return response
