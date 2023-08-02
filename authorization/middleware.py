@@ -8,6 +8,9 @@ class Redirect404Middleware:
         if request.path.startswith('/api/'):
             return self.get_response(request)
         
+        if request.path.startswith('/static'):
+            return self.get_response(request)
+        
         response = self.get_response(request)
 
         if response.status_code == 404:
