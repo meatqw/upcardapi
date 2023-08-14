@@ -4,7 +4,6 @@ from api.views import *
 
 
 urlpatterns = [
-    
     # cards
     path('card', CardsAPIView.as_view()),
     path('card/<int:id>', CardAPIView.as_view({'get': 'list'})),

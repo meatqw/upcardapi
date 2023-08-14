@@ -1,23 +1,16 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseNotFound
-from django.contrib.auth.decorators import login_required
-from api.models import *
 from django.urls import reverse
-from django.core.mail import send_mail
-from django.conf import settings
-from uuid import uuid4
-from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
-from django.contrib.auth import get_user_model
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
-from authorization.sending import send_message_email
- 
+
+from api.models import Account
+from services.send_message_service import SendMsg
+
 
 def welcome(request):
     """Wlcome page"""
@@ -26,14 +19,16 @@ def welcome(request):
     }
     return render(request, 'authorization/start.html', context)
 
-def emailSended(request):
+
+def email_send(request):
     """Email is send"""
     context = {
         "page_info": ""
     }
     return render(request, 'authorization/email-sended.html', context)
 
-def invalidToken(request):
+
+def invalid_token(request):
     """invalidToken page"""
     context = {
         "page_info": ""
@@ -47,7 +42,7 @@ def login(request):
     context = {
         "page_info": "Подтверждение Email"
     }
-    
+
     auth_url = ''
     if request.method == 'POST':
         email = request.POST['email']
@@ -61,8 +56,7 @@ def login(request):
             auth_url = reverse('auth_token', kwargs={'uidb64': uidb64, 'token': token})
             auth_url = request.build_absolute_uri(auth_url)
             try:
-                print(auth_url)
-                print(send_message_email(email=email, link=auth_url))
+                SendMsg.send_message_email_welcome(email=email, link=auth_url)
             except Exception as e:
                 pass
             return redirect('/auth/sended/')
@@ -72,14 +66,13 @@ def login(request):
             # создаем постоянную ссылку авторизации
             auth_url = reverse('auth_token', kwargs={'uidb64': uidb64, 'token': token})
             auth_url = request.build_absolute_uri(auth_url)
-            
+
             try:
-                print(auth_url)
-                print(send_message_email(email=email, link=auth_url))
+                SendMsg.send_message_email_welcome(email=email, link=auth_url)
             except Exception as e:
                 pass
             return redirect('/auth/sended/')
-            
+
     return render(request, 'authorization/confirmation.html', context)
 
 
@@ -107,7 +100,7 @@ def auth_token(request, uidb64, token):
 
         domain = 'https://my.upcard.online'
         # domain = 'http://localhost:1024/'
-        
+
         response = redirect(f'{domain}/load?token=%s' % token)
         return response
     else:
