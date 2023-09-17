@@ -1,4 +1,4 @@
-from django.urls import path, include, re_path
+from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from api.views import *
 
@@ -30,8 +30,8 @@ urlpatterns = [
     path('socialUpdate/<int:id>', SocialAPIUpdate.as_view()),
     
     # оформление подписки
-    path('subscribe', SubscribeAPIPost.as_view()),
-    
+    path('subscribe', SubscribeAPI.as_view()),
+
     # token test
     path('tokenCheck', TokenCheckAPIView.as_view()),
     

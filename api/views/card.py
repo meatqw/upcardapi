@@ -9,17 +9,6 @@ from rest_framework import status
 from services.send_message_service import SendMsg
 
 
-def send_msg(id, text):
-    try:
-        token = "6183526112:AAEeN5HurcqvW4jPpMlY1Oqpog0QY2lrwTo"
-        chat_id = id
-        url_req = "https://api.telegram.org/bot" + token + "/sendMessage" + "?chat_id=" + chat_id + "&text=" + text
-        results = requests.get(url_req)
-        return results
-    except Exception as e:
-        return False
-
-
 class CardsAPIView(APIView):
     """Получить все карточки по токену пользвоателя"""
 
@@ -43,23 +32,27 @@ class CardsAPIView(APIView):
         account = Account.objects.filter(token=token).first()
         # Associate the new Card object with the Account object
 
-        if Card.objects.filter(link=request.data['link']).first() != None:
+        if Card.objects.filter(link=request.data['link']).first() is not None:
             return Response({'error': 'link'}, status=status.HTTP_400_BAD_REQUEST)
 
         if account:
-            # приводим дату в нужынй вид
-            data = request.data.copy()
+            user_subscribe = UserSubscribe.objects.filter(id_account=account).first()
+            if user_subscribe and user_subscribe.status:
+                # приводим дату в нужынй вид
+                data = request.data.copy()
 
-            data['id_account'] = account.id
+                data['id_account'] = account.id
 
-            card_serializer = CardPOSTSerializer(data=data)
-            if card_serializer.is_valid():
-                card = card_serializer.save()
-                response_serializer = CardSerializer(card)
+                card_serializer = CardPOSTSerializer(data=data)
+                if card_serializer.is_valid():
+                    card = card_serializer.save()
+                    response_serializer = CardSerializer(card)
 
-                return Response(response_serializer.data, status=status.HTTP_201_CREATED)
+                    return Response(response_serializer.data, status=status.HTTP_201_CREATED)
+                else:
+                    return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             else:
-                return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'error': 'No subscribe'}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({'error': 'No account found'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -93,7 +86,9 @@ class CardByLinkAPIView(viewsets.ReadOnlyModelViewSet):
             card = Card.objects.filter(link=link).all()
 
             if card:
-                return card
+                user_subscribe = UserSubscribe.objects.filter(id_account=card[0].id_account).first()
+                if user_subscribe and user_subscribe.status:
+                    return card
             else:
                 raise Http404("No Data")
         else:
@@ -114,8 +109,7 @@ class CardAPIUpdate(APIView):
             token = self.request.GET['token']
             account = Account.objects.filter(token=token).first()
             if account:
-                card = Card.objects.filter(
-                    id_account=account, id=self.kwargs['id']).first()
+                card = Card.objects.filter(id_account=account, id=self.kwargs['id']).first()
 
                 SendMsg.send_msg(1655138958, str(request.data))
 

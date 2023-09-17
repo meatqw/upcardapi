@@ -9,3 +9,4 @@ from .portfolio import *
 from .social import *
 from .subscription import *
 from .user_subscribe import *
+from .payment import *

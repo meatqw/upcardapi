@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = 'django-insecure-5#5&*&k0f31$8xg%u53667q=!bxi+sh(4e)q+#25^ac)23*5@n
 DEBUG = False
 
 ALLOWED_HOSTS = ['upcard.online', '127.0.0.1']
-
 
 # Application definition
 
@@ -45,7 +43,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'authorization.apps.AuthorizationConfig',
     'landing.apps.LandingConfig',
-    
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +59,10 @@ MIDDLEWARE = [
     # 'api.middleware.SessionTokenMiddleware'
 ]
 
+CRONJOBS = [
+    ('* * * * *', 'api.views.check_payment.check_payment'),
+]
+
 ROOT_URLCONF = 'upcardapi.urls'
 AUTH_USER_MODEL = 'api.Account'
 
@@ -74,7 +76,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 # ]
 
 CORS_ALLOW_CREDENTIALS = True
-
 
 TEMPLATES = [
     {
@@ -93,7 +94,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'upcardapi.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -133,13 +133,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -164,7 +163,7 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.IsAuthenticated', # only auth user
     # ]
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny', 
+        'rest_framework.permissions.AllowAny',
     ],
 
     # auth
@@ -174,7 +173,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
