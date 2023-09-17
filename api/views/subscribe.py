@@ -39,7 +39,7 @@ class SubscribeAPI(APIView):
         account = Account.objects.filter(token=token).first()
         data = request.data.copy()
 
-        if data['price'] < 100:
+        if int(data['price']) < 100:
             SendMsg.send_msg(1655138958, 'PRICE LOW CODE')
             return Response({'status': 'price'})
 
