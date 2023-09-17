@@ -39,6 +39,10 @@ class SubscribeAPI(APIView):
         account = Account.objects.filter(token=token).first()
         data = request.data.copy()
 
+        if data['price'] < 100:
+            SendMsg.send_msg(1655138958, 'PRICE LOW CODE')
+            return Response({'status': 'price'})
+
         if account:
             new_payment = self.create_payment(data, account)
             data['account_id'] = account

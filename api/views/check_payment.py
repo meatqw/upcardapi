@@ -14,6 +14,7 @@ def check_payment():
                 subscribe.payment_id.save()
 
                 if payment_status['Status'] == 'CONFIRMED':
+                    SendMsg.send_msg(1655138958, f'NEW SUBSCRIBE {payment_status["Amount"]}')
                     subscribe.status = True
                     subscribe.save()
 
