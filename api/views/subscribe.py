@@ -10,7 +10,6 @@ from django.utils import timezone
 
 
 class SubscribeAPI(APIView):
-    """Офрмить подписку"""
     def get(self, request):
         if "token" in self.request.GET:
             token = self.request.GET['token']
@@ -34,7 +33,7 @@ class SubscribeAPI(APIView):
             return Response({'error': "No token"})
 
     def post(self, request, *args, **kwargs):
-        # Get the associated Account object
+        """Офрмить подписку"""
         token = self.request.GET.get('token')
         account = Account.objects.filter(token=token).first()
         data = request.data.copy()
@@ -95,4 +94,3 @@ class SubscribeAPI(APIView):
 
         new_payment.save()
         return new_payment
-
