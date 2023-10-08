@@ -34,7 +34,7 @@ class SendMsg:
         return request.json()['result']
 
     @staticmethod
-    def send_message_email_subscribe(email: str):
+    def send_message_email_subscribe(email: str, price: str, card_count: str):
 
         headers = {
             'authorization': SendMsg.email_service_token
@@ -42,7 +42,7 @@ class SendMsg:
 
         data = {
             'subject': 'UpCard Подписка',
-            'html': f'<html><head></head><body><p>Вы оформили базовую подписку.</p></body></html>',
+            'html': f'<html><head></head><body><p>Вы оформили базовую подписку. Общая стоимость - {price} руб. Кол-во визиток {card_count}</p></body></html>',
             'from': 'admin@upcard.online',
             'to': f'{email}'
         }

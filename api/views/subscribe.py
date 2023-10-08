@@ -64,7 +64,7 @@ class SubscribeAPI(APIView):
                     }
                 )
 
-                SendMsg.send_message_email_subscribe(account.email)
+                SendMsg.send_message_email_subscribe(account.email, data['price'], data['card_count'])
 
                 return Response({'status': 'success', 'payment_url': new_payment.payment_url},
                                 status=status.HTTP_200_OK)
@@ -82,7 +82,6 @@ class SubscribeAPI(APIView):
 
         tinkoff = Tinkoff()
         data = tinkoff.init(request_data)
-
 
         new_payment = Payment(
             payment_id=data['PaymentId'],

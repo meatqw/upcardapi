@@ -6,8 +6,8 @@ import hashlib
 class Tinkoff:
     api_url = 'https://securepay.tinkoff.ru/v2/'
 
-    TERMINAL_TEST = '1688986064848DEMO'
-    PASSWORD_TEST = 'zf0lsbwur8h0dxcx'
+    # TERMINAL_TEST = '1688986064848DEMO'
+    # PASSWORD_TEST = 'zf0lsbwur8h0dxcx'
 
     TERMINAL = '1688986064848'
     PASSWORD = 'xtep9xb8e2veaa7t'
